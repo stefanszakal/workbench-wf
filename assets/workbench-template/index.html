@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wireframe Workbench</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    /* ===========================================
+       WORKBENCH DOCUMENT STYLES
+       Core styles for the wireframe workbench
+       =========================================== */
+
+    /* Offset anchors for sticky header */
+    section[id] {
+      scroll-margin-top: 5rem;
+    }
+
+    /* Expandable content */
+    .expandable-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .expandable-content.expanded {
+      max-height: 2000px;
+    }
+    .expand-toggle::after {
+      content: '+';
+      margin-left: 8px;
+    }
+    .expand-toggle.expanded::after {
+      content: '−';
+    }
+  </style>
+
+  <!-- ===========================================
+       WORKBENCH VIEWING PREFERENCES (Optional)
+       These styles only affect viewing comfort.
+       Safe to remove when handing off to frontend.
+       =========================================== -->
+  <style>
+    /* Dark mode - viewing preference only */
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #e5e5e5;
+    }
+    body.dark-mode .text-gray-500 {
+      color: #888;
+    }
+    body.dark-mode .text-gray-400 {
+      color: #666;
+    }
+    body.dark-mode .text-gray-700 {
+      color: #aaa;
+    }
+    body.dark-mode .border-black {
+      border-color: #444;
+    }
+    body.dark-mode .border-gray-300 {
+      border-color: #444;
+    }
+    body.dark-mode .bg-gray-100 {
+      background-color: #2a2a2a;
+    }
+    body.dark-mode hr {
+      border-color: #444;
+    }
+    body.dark-mode .border-l-2 {
+      border-color: #444;
+    }
+  </style>
+</head>
+<body class="font-sans bg-white text-black">
+
+  <!-- Sticky Top Bar -->
+  <nav id="utility-bar" class="fixed top-0 left-0 right-0 h-10 z-50 flex items-center justify-between px-4 border-b border-gray-200" style="background-color: #fafafa;">
+    <div class="flex items-center gap-6 text-xs text-gray-500">
+      <a href="#overview" class="nav-link hover:text-black" data-section="overview">Overview</a>
+      <a href="#features" class="nav-link hover:text-black" data-section="features">Features</a>
+      <a href="#flows" class="nav-link hover:text-black" data-section="flows">Flows</a>
+      <a href="#pages-v1" class="nav-link hover:text-black" data-section="pages-v1">Pages v1</a>
+      <a href="#pages-v2" class="nav-link hover:text-black" data-section="pages-v2">Pages v2</a>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="bg-white" class="w-5 h-5 bg-white border border-gray-300 hover:border-gray-500 ring-2 ring-black" title="White background"></button>
+      <button id="bg-sepia" class="w-5 h-5 border border-gray-300 hover:border-gray-500" style="background-color: #f5f1e8;" title="Sepia background"></button>
+      <button id="bg-dark" class="w-5 h-5 border border-gray-300 hover:border-gray-500" style="background-color: #1a1a1a;" title="Dark background"></button>
+    </div>
+  </nav>
+
+  <!-- Document -->
+  <div class="max-w-6xl mx-auto px-12 pt-28 pb-16">
+
+    <!-- Header -->
+    <header class="pb-12">
+      <div class="grid grid-cols-12 gap-8">
+        <div class="col-span-8">
+          <h1 class="text-6xl font-bold leading-[1.1] tracking-tight">
+            Project Name
+          </h1>
+        </div>
+        <div class="col-span-4 text-right text-sm">
+          <p>Version 1.0</p>
+          <p>January 2025</p>
+          <p class="mt-4">8 Pages</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Header Divider -->
+    <hr class="border-t-2 border-black mb-16">
+
+    <!-- Overview Section -->
+    <section id="overview" class="mb-20">
+        <div class="grid grid-cols-12 gap-8">
+          <div class="col-span-3">
+            <h2 class="text-lg font-semibold">Product Summary</h2>
+          </div>
+          <div class="col-span-9">
+            <p class="text-2xl font-light leading-relaxed max-w-3xl mb-6">
+              A brief, compelling description of what this product is and the problem it solves. This should capture the essence of the product vision in two to three sentences.
+            </p>
+
+            <!-- Expandable details -->
+            <button class="expand-toggle text-sm font-medium flex items-center cursor-pointer" data-expand="summary-details">
+              More details
+            </button>
+            <div id="summary-details" class="expandable-content mt-6">
+              <div class="border-l-2 border-black pl-6 space-y-4">
+                <div>
+                  <p class="font-medium mb-1">Target Users</p>
+                  <p class="text-sm text-gray-700">Description of the primary user personas and their needs.</p>
+                </div>
+                <div>
+                  <p class="font-medium mb-1">Problem Statement</p>
+                  <p class="text-sm text-gray-700">The core problem this product addresses and why existing solutions fall short.</p>
+                </div>
+                <div>
+                  <p class="font-medium mb-1">Success Metrics</p>
+                  <p class="text-sm text-gray-700">How we'll measure whether the product is achieving its goals.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <hr class="border-t border-black mb-20">
+
+      <!-- Core Features -->
+      <section id="features" class="mb-20">
+        <div class="grid grid-cols-12 gap-8">
+          <div class="col-span-3">
+            <h2 class="text-lg font-semibold">Core Features</h2>
+          </div>
+          <div class="col-span-9 space-y-12">
+
+            <!-- Feature 1 -->
+            <div class="grid grid-cols-12 gap-8">
+              <div class="col-span-1">
+                <span class="text-3xl font-bold">01</span>
+              </div>
+              <div class="col-span-11">
+                <h3 class="text-xl font-semibold mb-3">Feature Name</h3>
+                <p class="text-sm leading-relaxed mb-4 max-w-2xl">
+                  Brief description of this core feature and why it matters to users. This can be a paragraph that explains the feature in more detail.
+                </p>
+                <button class="expand-toggle text-sm text-gray-600 cursor-pointer" data-expand="feature-1-details">
+                  Details
+                </button>
+                <div id="feature-1-details" class="expandable-content mt-4">
+                  <ul class="text-sm space-y-2 text-gray-700">
+                    <li>• Capability or sub-feature one</li>
+                    <li>• Capability or sub-feature two</li>
+                    <li>• Capability or sub-feature three</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="grid grid-cols-12 gap-8">
+              <div class="col-span-1">
+                <span class="text-3xl font-bold">02</span>
+              </div>
+              <div class="col-span-11">
+                <h3 class="text-xl font-semibold mb-3">Feature Name</h3>
+                <p class="text-sm leading-relaxed mb-4 max-w-2xl">
+                  Brief description of this core feature and why it matters to users. This can be a paragraph that explains the feature in more detail.
+                </p>
+                <button class="expand-toggle text-sm text-gray-600 cursor-pointer" data-expand="feature-2-details">
+                  Details
+                </button>
+                <div id="feature-2-details" class="expandable-content mt-4">
+                  <ul class="text-sm space-y-2 text-gray-700">
+                    <li>• Capability or sub-feature one</li>
+                    <li>• Capability or sub-feature two</li>
+                    <li>• Capability or sub-feature three</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="grid grid-cols-12 gap-8">
+              <div class="col-span-1">
+                <span class="text-3xl font-bold">03</span>
+              </div>
+              <div class="col-span-11">
+                <h3 class="text-xl font-semibold mb-3">Feature Name</h3>
+                <p class="text-sm leading-relaxed mb-4 max-w-2xl">
+                  Brief description of this core feature and why it matters to users. This can be a paragraph that explains the feature in more detail.
+                </p>
+                <button class="expand-toggle text-sm text-gray-600 cursor-pointer" data-expand="feature-3-details">
+                  Details
+                </button>
+                <div id="feature-3-details" class="expandable-content mt-4">
+                  <ul class="text-sm space-y-2 text-gray-700">
+                    <li>• Capability or sub-feature one</li>
+                    <li>• Capability or sub-feature two</li>
+                    <li>• Capability or sub-feature three</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <hr class="border-t border-black mb-20">
+
+      <!-- User Flows -->
+      <section id="flows" class="mb-20">
+        <div class="grid grid-cols-12 gap-8">
+          <div class="col-span-3">
+            <h2 class="text-lg font-semibold">User Flows</h2>
+          </div>
+          <div class="col-span-9 space-y-16">
+
+            <!-- Flow 1 -->
+            <div>
+              <h3 class="text-xl font-semibold mb-4">Onboarding</h3>
+              <p class="text-sm mb-6 max-w-xl">
+                New user signs up, completes profile setup, and reaches their dashboard for the first time.
+              </p>
+              <div class="flex items-center gap-4 text-sm mb-4">
+                <span class="border border-black px-4 py-2">Landing</span>
+                <span class="text-xs">→</span>
+                <span class="border border-black px-4 py-2">Sign Up</span>
+                <span class="text-xs">→</span>
+                <span class="border border-black px-4 py-2">Profile Setup</span>
+                <span class="text-xs">→</span>
+                <span class="border border-black px-4 py-2">Dashboard</span>
+              </div>
+              <button class="expand-toggle text-sm text-gray-600 cursor-pointer" data-expand="flow-1-details">
+                Details
+              </button>
+              <div id="flow-1-details" class="expandable-content mt-4">
+                <div class="text-sm text-gray-700 space-y-3 border-l-2 border-black pl-6">
+                  <p><strong>Entry point:</strong> User clicks "Get Started" on landing page</p>
+                  <p><strong>Key decisions:</strong> Email vs social signup, optional profile fields</p>
+                  <p><strong>Success state:</strong> User lands on personalized dashboard</p>
+                  <p><strong>Edge cases:</strong> Email already exists, social auth fails</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Flow 2 -->
+            <div>
+              <h3 class="text-xl font-semibold mb-4">Core Task</h3>
+              <p class="text-sm mb-6 max-w-xl">
+                User navigates to the main feature, completes the primary action, and sees confirmation.
+              </p>
+              <div class="flex items-center gap-4 text-sm mb-4">
+                <span class="border border-black px-4 py-2">Dashboard</span>
+                <span class="text-xs">→</span>
+                <span class="border border-black px-4 py-2">Browse</span>
+                <span class="text-xs">→</span>
+                <span class="border border-black px-4 py-2">Detail</span>
+                <span class="text-xs">→</span>
+                <span class="border border-black px-4 py-2">Confirmation</span>
+              </div>
+              <button class="expand-toggle text-sm text-gray-600 cursor-pointer" data-expand="flow-2-details">
+                Details
+              </button>
+              <div id="flow-2-details" class="expandable-content mt-4">
+                <div class="text-sm text-gray-700 space-y-3 border-l-2 border-black pl-6">
+                  <p><strong>Entry point:</strong> User clicks primary CTA on dashboard</p>
+                  <p><strong>Key decisions:</strong> Filter/sort options, item selection</p>
+                  <p><strong>Success state:</strong> Action completed, confirmation shown</p>
+                  <p><strong>Edge cases:</strong> Empty states, error handling</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <hr class="border-t border-black mb-20">
+
+      <!-- UI Requirements -->
+      <section class="mb-20">
+        <div class="grid grid-cols-12 gap-8">
+          <div class="col-span-3">
+            <h2 class="text-lg font-semibold">UI Requirements</h2>
+          </div>
+          <div class="col-span-9">
+            <div class="grid grid-cols-2 gap-x-12 gap-y-10">
+              <div class="border-l-2 border-black pl-6">
+                <p class="font-semibold mb-2">Responsive Layout</p>
+                <p class="text-sm text-gray-700">Must work seamlessly across desktop, tablet, and mobile breakpoints.</p>
+              </div>
+              <div class="border-l-2 border-black pl-6">
+                <p class="font-semibold mb-2">Accessibility</p>
+                <p class="text-sm text-gray-700">WCAG 2.1 AA compliance for all interactive elements.</p>
+              </div>
+              <div class="border-l-2 border-black pl-6">
+                <p class="font-semibold mb-2">Loading States</p>
+                <p class="text-sm text-gray-700">Clear feedback for all asynchronous actions and data fetching.</p>
+              </div>
+              <div class="border-l-2 border-black pl-6">
+                <p class="font-semibold mb-2">Error Handling</p>
+                <p class="text-sm text-gray-700">Graceful error states with clear recovery paths for users.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Divider -->
+      <hr class="border-t border-black mb-20">
+
+      <!-- Sitemap -->
+      <section class="mb-20">
+        <div class="grid grid-cols-12 gap-8">
+          <div class="col-span-3">
+            <h2 class="text-lg font-semibold">Sitemap</h2>
+          </div>
+          <div class="col-span-9">
+            <div class="grid grid-cols-4 gap-8">
+              <div>
+                <p class="font-medium mb-4">Public</p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li>Landing</li>
+                  <li>Features</li>
+                  <li>Pricing</li>
+                  <li>About</li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-medium mb-4">Auth</p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li>Login</li>
+                  <li>Sign Up</li>
+                  <li>Forgot Password</li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-medium mb-4">App</p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li>Dashboard</li>
+                  <li>Browse / List</li>
+                  <li>Detail</li>
+                  <li>Create / Edit</li>
+                </ul>
+              </div>
+              <div>
+                <p class="font-medium mb-4">Account</p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                  <li>Profile</li>
+                  <li>Settings</li>
+                  <li>Billing</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- Divider -->
+    <hr class="border-t border-black mb-20">
+
+    <!-- Pages v1 Section -->
+    <section id="pages-v1" class="mb-20">
+      <div class="grid grid-cols-12 gap-8 mb-12">
+        <div class="col-span-3">
+          <h2 class="text-lg font-semibold">Pages v1</h2>
+          <p class="text-sm text-gray-500 mt-1">Initial wireframes</p>
+        </div>
+        <div class="col-span-9">
+          <p class="text-sm text-gray-700">
+            Click any page to view the full wireframe.
+          </p>
+        </div>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="grid grid-cols-4 gap-8">
+        <a href="pages/home.html" class="group block">
+          <div class="aspect-[3/4] border-2 border-black mb-4 overflow-hidden">
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+              <span class="text-sm text-gray-400">Preview</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mb-1">Public</p>
+          <p class="font-semibold group-hover:underline">Landing</p>
+        </a>
+
+        <a href="pages/dashboard.html" class="group block">
+          <div class="aspect-[3/4] border-2 border-black mb-4 overflow-hidden">
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+              <span class="text-sm text-gray-400">Preview</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mb-1">App</p>
+          <p class="font-semibold group-hover:underline">Dashboard</p>
+        </a>
+
+        <a href="pages/listings.html" class="group block">
+          <div class="aspect-[3/4] border-2 border-black mb-4 overflow-hidden">
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+              <span class="text-sm text-gray-400">Preview</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mb-1">App</p>
+          <p class="font-semibold group-hover:underline">Browse / List</p>
+        </a>
+
+        <a href="pages/detail.html" class="group block">
+          <div class="aspect-[3/4] border-2 border-black mb-4 overflow-hidden">
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+              <span class="text-sm text-gray-400">Preview</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mb-1">App</p>
+          <p class="font-semibold group-hover:underline">Detail</p>
+        </a>
+
+        <a href="pages/login.html" class="group block">
+          <div class="aspect-[3/4] border-2 border-black mb-4 overflow-hidden">
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+              <span class="text-sm text-gray-400">Preview</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mb-1">Auth</p>
+          <p class="font-semibold group-hover:underline">Login</p>
+        </a>
+
+        <a href="pages/signup.html" class="group block">
+          <div class="aspect-[3/4] border-2 border-black mb-4 overflow-hidden">
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+              <span class="text-sm text-gray-400">Preview</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mb-1">Auth</p>
+          <p class="font-semibold group-hover:underline">Sign Up</p>
+        </a>
+
+        <a href="pages/settings.html" class="group block">
+          <div class="aspect-[3/4] border-2 border-black mb-4 overflow-hidden">
+            <div class="w-full h-full bg-gray-100 flex items-center justify-center group-hover:bg-gray-200 transition-colors">
+              <span class="text-sm text-gray-400">Preview</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mb-1">Account</p>
+          <p class="font-semibold group-hover:underline">Settings</p>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <hr class="border-t border-black mb-20">
+
+    <!-- Pages v2 Section -->
+    <section id="pages-v2" class="mb-20">
+      <div class="grid grid-cols-12 gap-8 mb-12">
+        <div class="col-span-3">
+          <h2 class="text-lg font-semibold">Pages v2</h2>
+          <p class="text-sm text-gray-500 mt-1">Updated wireframes</p>
+        </div>
+        <div class="col-span-9">
+          <p class="text-sm text-gray-700">
+            Iteration based on feedback. Click any page to view.
+          </p>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="border-2 border-dashed border-gray-300 py-24 text-center">
+        <p class="text-gray-500">No pages in this version yet</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t-2 border-black pt-12 mt-20">
+      <div class="grid grid-cols-12 gap-8">
+        <div class="col-span-8">
+          <p class="text-xs uppercase tracking-[0.2em] text-gray-500 mb-4">Generated with Wireframing Skill v1.0</p>
+          <p class="text-sm text-gray-500 leading-relaxed">
+            To continue working on this project, run <span class="font-mono">/wireframing</span> in Claude Code.<br>
+            Add pages, refine flows, iterate through conversation.
+          </p>
+          <p class="text-sm text-gray-500 mt-3">
+            <a href="https://github.com/username/wireframing-skill" class="underline hover:text-black">View on GitHub</a>
+            <span class="mx-2">·</span>
+            Components: <a href="pages/components.html" class="underline hover:text-black">Desktop</a> / <a href="pages/components-mobile.html" class="underline hover:text-black">Mobile</a>
+          </p>
+        </div>
+        <div class="col-span-4 text-right">
+          <p class="text-xs text-gray-400 font-mono">&#9608;&#9608;&#9617;&#9617;</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Expandable content
+    const expandToggles = document.querySelectorAll('.expand-toggle');
+    expandToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const targetId = toggle.dataset.expand;
+        const content = document.getElementById(targetId);
+        content.classList.toggle('expanded');
+        toggle.classList.toggle('expanded');
+      });
+    });
+
+    // Background color toggle
+    const bgWhite = document.getElementById('bg-white');
+    const bgSepia = document.getElementById('bg-sepia');
+    const bgDark = document.getElementById('bg-dark');
+    const utilityBar = document.getElementById('utility-bar');
+    const themeButtons = [bgWhite, bgSepia, bgDark];
+
+    function clearThemeSelection() {
+      themeButtons.forEach(btn => btn.classList.remove('ring-2', 'ring-black', 'ring-white'));
+      document.body.classList.remove('dark-mode');
+      document.body.style.backgroundColor = '';
+    }
+
+    bgWhite.addEventListener('click', () => {
+      clearThemeSelection();
+      document.body.style.backgroundColor = '#ffffff';
+      utilityBar.style.backgroundColor = '#fafafa';
+      utilityBar.style.borderColor = '#e5e5e5';
+      bgWhite.classList.add('ring-2', 'ring-black');
+    });
+
+    bgSepia.addEventListener('click', () => {
+      clearThemeSelection();
+      document.body.style.backgroundColor = '#f5f1e8';
+      utilityBar.style.backgroundColor = '#eae6dd';
+      utilityBar.style.borderColor = '#ddd8cf';
+      bgSepia.classList.add('ring-2', 'ring-black');
+    });
+
+    bgDark.addEventListener('click', () => {
+      clearThemeSelection();
+      document.body.classList.add('dark-mode');
+      utilityBar.style.backgroundColor = '#2a2a2a';
+      utilityBar.style.borderColor = '#444';
+      bgDark.classList.add('ring-2', 'ring-white');
+    });
+
+    // Active section tracking
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    function updateActiveNav() {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 60;
+        if (window.scrollY >= sectionTop) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('text-black', 'font-medium');
+        link.classList.add('text-gray-500');
+        if (link.dataset.section === current) {
+          link.classList.add('text-black', 'font-medium');
+          link.classList.remove('text-gray-500');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
+  </script>
+
+</body>
+</html>

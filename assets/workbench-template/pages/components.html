@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Components | Wireframe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- ===========================================
+       WIREFRAME CONTENT STYLES
+       Core styles for wireframe rendering.
+       These styles define the wireframe visual language.
+       =========================================== -->
+  <style>
+    .wireframe {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    /* 1.5px border utility */
+    .border-wire {
+      border-width: 1.5px;
+      border-style: solid;
+      border-color: black;
+    }
+    .border-b-wire {
+      border-bottom-width: 1.5px;
+      border-bottom-style: solid;
+      border-bottom-color: black;
+    }
+    .border-t-wire {
+      border-top-width: 1.5px;
+      border-top-style: solid;
+      border-top-color: black;
+    }
+    .border-r-wire {
+      border-right-width: 1.5px;
+      border-right-style: solid;
+      border-right-color: black;
+    }
+    .border-l-wire {
+      border-left-width: 1.5px;
+      border-left-style: solid;
+      border-left-color: black;
+    }
+    .divide-y-wire > * + * {
+      border-top-width: 1.5px;
+      border-top-style: solid;
+      border-top-color: black;
+    }
+
+    /* Dashed section dividers */
+    .section-divider {
+      border-bottom: 1.5px dashed black;
+      border-image: repeating-linear-gradient(90deg, black 0, black 8px, transparent 8px, transparent 12px) 1;
+    }
+
+    /* Simple drop shadow (no blur) */
+    .shadow-wire {
+      box-shadow: 3px 3px 0 black;
+    }
+  </style>
+
+  <!-- ===========================================
+       WORKBENCH VIEWING PREFERENCES (Optional)
+       These styles only affect viewing comfort.
+       Safe to remove when handing off to frontend.
+       =========================================== -->
+  <style>
+    /* Dark mode - viewing preference only */
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #e5e5e5;
+    }
+    body.dark-mode .wireframe {
+      background-color: #1a1a1a;
+      color: #e5e5e5;
+    }
+
+    /* Borders */
+    body.dark-mode .wireframe .border-wire,
+    body.dark-mode .wireframe .border-b-wire,
+    body.dark-mode .wireframe .border-t-wire,
+    body.dark-mode .wireframe .border-r-wire,
+    body.dark-mode .wireframe .border-l-wire {
+      border-color: #555;
+    }
+    body.dark-mode .wireframe .divide-y-wire > * + * {
+      border-color: #555;
+    }
+    body.dark-mode .wireframe .section-divider {
+      border-image: repeating-linear-gradient(90deg, #555 0, #555 8px, transparent 8px, transparent 12px) 1;
+    }
+
+    /* Backgrounds */
+    body.dark-mode .wireframe .bg-white {
+      background-color: #1a1a1a;
+    }
+    body.dark-mode .wireframe .bg-gray-50 {
+      background-color: #222;
+    }
+    body.dark-mode .wireframe .bg-gray-100 {
+      background-color: #2a2a2a;
+    }
+    body.dark-mode .wireframe .bg-gray-200 {
+      background-color: #333;
+    }
+
+    /* Inverted elements (buttons, badges, etc.) */
+    body.dark-mode .wireframe .bg-black {
+      background-color: #e5e5e5;
+      color: #1a1a1a;
+    }
+    body.dark-mode .wireframe .bg-black .text-white,
+    body.dark-mode .wireframe .text-white {
+      color: #1a1a1a;
+    }
+
+    /* Text colors */
+    body.dark-mode .wireframe .text-black {
+      color: #e5e5e5;
+    }
+    body.dark-mode .wireframe .text-gray-400,
+    body.dark-mode .wireframe .text-gray-500 {
+      color: #888;
+    }
+
+    /* Form inputs */
+    body.dark-mode .wireframe input,
+    body.dark-mode .wireframe textarea,
+    body.dark-mode .wireframe select {
+      background-color: #1a1a1a;
+      color: #e5e5e5;
+    }
+    body.dark-mode .wireframe input::placeholder,
+    body.dark-mode .wireframe textarea::placeholder {
+      color: #666;
+    }
+
+    /* Shadow */
+    body.dark-mode .wireframe .shadow-wire {
+      box-shadow: 3px 3px 0 #555;
+    }
+
+    /* Tooltip arrow */
+    body.dark-mode .wireframe .border-t-black {
+      border-top-color: #e5e5e5;
+    }
+
+    /* Ring colors for avatar groups */
+    body.dark-mode .wireframe .ring-white {
+      --tw-ring-color: #1a1a1a;
+    }
+  </style>
+</head>
+<body class="bg-white min-h-screen font-sans">
+
+  <!-- Sticky Top Bar -->
+  <nav id="utility-bar" class="fixed top-0 left-0 right-0 h-10 z-50 flex items-center justify-between px-4 border-b border-gray-200" style="background-color: #fafafa;">
+    <div class="flex items-center gap-6 text-xs text-gray-500">
+      <a href="../index.html" class="hover:text-black flex items-center gap-1">
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Workbench
+      </a>
+      <span class="text-gray-300">|</span>
+      <span class="text-black font-medium">Components</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="bg-white" class="w-5 h-5 bg-white border border-gray-300 hover:border-gray-500 ring-2 ring-black" title="White background"></button>
+      <button id="bg-sepia" class="w-5 h-5 border border-gray-300 hover:border-gray-500" style="background-color: #f5f1e8;" title="Sepia background"></button>
+      <button id="bg-dark" class="w-5 h-5 border border-gray-300 hover:border-gray-500" style="background-color: #1a1a1a;" title="Dark background"></button>
+    </div>
+  </nav>
+
+  <!-- Component Library Container -->
+  <div class="pt-16 pb-8 px-4">
+    <div class="max-w-5xl mx-auto">
+
+      <!-- Header -->
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold mb-2">Component Library</h1>
+        <p class="text-lg">Wireframe components following shadcn/Radix naming conventions. This page serves as the single source of truth for all component styles.</p>
+      </div>
+
+      <!-- Component Frame -->
+      <div id="wireframe" class="wireframe bg-white border-wire rounded-md overflow-hidden">
+
+        <!-- ==================== BUTTON ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Button</h2>
+          <p class="text-sm mb-6">Displays a button or a component that looks like a button.</p>
+
+          <div class="space-y-6">
+            <div>
+              <p class="text-sm font-light mb-3">Variants</p>
+              <div class="flex items-center gap-4">
+                <button class="px-6 py-3 bg-black text-white rounded-md font-medium">Primary</button>
+                <button class="px-6 py-3 border-wire rounded-md font-medium">Secondary</button>
+                <button class="font-medium underline">Link</button>
+              </div>
+            </div>
+
+            <div>
+              <p class="text-sm font-light mb-3">Sizes</p>
+              <div class="flex items-center gap-4">
+                <button class="px-3 py-1 text-sm bg-black text-white rounded-md">Small</button>
+                <button class="px-5 py-2 bg-black text-white rounded-md">Default</button>
+                <button class="px-8 py-4 text-lg bg-black text-white rounded-md">Large</button>
+              </div>
+            </div>
+
+            <div>
+              <p class="text-sm font-light mb-3">With Icon</p>
+              <div class="flex items-center gap-4">
+                <button class="px-5 py-2 bg-black text-white rounded-md flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                  </svg>
+                  Add Item
+                </button>
+                <button class="px-5 py-2 border-wire rounded-md flex items-center gap-2">
+                  Download
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                  </svg>
+                </button>
+                <button class="w-10 h-10 border-wire rounded-md flex items-center justify-center">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== INPUT ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Input</h2>
+          <p class="text-sm mb-6">Displays a form input field.</p>
+
+          <div class="space-y-6 max-w-md">
+            <div>
+              <label class="block text-sm font-medium mb-2">Default</label>
+              <input type="text" class="w-full px-4 py-3 border-wire rounded-md" placeholder="Enter text...">
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">With Label & Description</label>
+              <input type="email" class="w-full px-4 py-3 border-wire rounded-md" placeholder="john@example.com">
+              <p class="text-sm font-light mt-1">We'll never share your email.</p>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">Disabled</label>
+              <input type="text" class="w-full px-4 py-3 border-wire rounded-md bg-gray-100" placeholder="Disabled input" disabled>
+            </div>
+
+            <div>
+              <label class="block text-sm font-medium mb-2">With Icon</label>
+              <div class="relative">
+                <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="text" class="w-full pl-10 pr-4 py-3 border-wire rounded-md" placeholder="Search...">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TEXTAREA ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Textarea</h2>
+          <p class="text-sm mb-6">Displays a form textarea.</p>
+
+          <div class="max-w-md">
+            <label class="block text-sm font-medium mb-2">Message</label>
+            <textarea class="w-full px-4 py-3 border-wire rounded-md h-32" placeholder="Type your message here..."></textarea>
+          </div>
+        </section>
+
+        <!-- ==================== SELECT ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Select</h2>
+          <p class="text-sm mb-6">Displays a select input with options.</p>
+
+          <div class="max-w-md">
+            <label class="block text-sm font-medium mb-2">Choose an option</label>
+            <select class="w-full px-4 py-3 pr-10 border-wire rounded-md bg-white">
+              <option>Select...</option>
+              <option>Option One</option>
+              <option>Option Two</option>
+              <option>Option Three</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- ==================== CHECKBOX ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Checkbox</h2>
+          <p class="text-sm mb-6">A control that allows the user to toggle between checked and not checked.</p>
+
+          <div class="space-y-4">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" class="w-5 h-5 border-wire rounded mt-0.5" checked>
+              <div>
+                <span class="font-medium">Accept terms</span>
+                <p class="text-sm font-light">You agree to our Terms of Service and Privacy Policy.</p>
+              </div>
+            </label>
+
+            <label class="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" class="w-5 h-5 border-wire rounded">
+              <span>Unchecked option</span>
+            </label>
+          </div>
+        </section>
+
+        <!-- ==================== RADIO GROUP ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Radio Group</h2>
+          <p class="text-sm mb-6">A set of checkable buttons where only one can be checked at a time.</p>
+
+          <div class="space-y-6">
+            <div class="space-y-3">
+              <label class="flex items-center gap-3 cursor-pointer">
+                <div class="w-5 h-5 border-wire rounded-full flex items-center justify-center">
+                  <div class="w-3 h-3 bg-black rounded-full"></div>
+                </div>
+                <span>Default option</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <div class="w-5 h-5 border-wire rounded-full"></div>
+                <span>Comfortable</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer">
+                <div class="w-5 h-5 border-wire rounded-full"></div>
+                <span>Compact</span>
+              </label>
+            </div>
+
+            <div>
+              <p class="text-sm font-light mb-3">Card Variant</p>
+              <div class="grid grid-cols-3 gap-4 max-w-xl">
+                <label class="p-4 border-wire rounded-md cursor-pointer bg-black text-white">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-medium">Startup</span>
+                    <div class="w-4 h-4 border border-white rounded-full flex items-center justify-center" style="border-width: 1.5px;">
+                      <div class="w-2 h-2 bg-white rounded-full"></div>
+                    </div>
+                  </div>
+                  <p class="text-sm font-light">$9/month</p>
+                </label>
+                <label class="p-4 border-wire rounded-md cursor-pointer">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-medium">Business</span>
+                    <div class="w-4 h-4 border-wire rounded-full"></div>
+                  </div>
+                  <p class="text-sm font-light">$29/month</p>
+                </label>
+                <label class="p-4 border-wire rounded-md cursor-pointer">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="font-medium">Enterprise</span>
+                    <div class="w-4 h-4 border-wire rounded-full"></div>
+                  </div>
+                  <p class="text-sm font-light">$99/month</p>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SWITCH ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Switch</h2>
+          <p class="text-sm mb-6">A control that allows the user to toggle between two states.</p>
+
+          <div class="space-y-6">
+            <div class="flex items-center gap-8">
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-6 bg-gray-200 border-wire rounded-full relative cursor-pointer">
+                  <div class="w-5 h-5 bg-white border-wire rounded-full absolute top-1/2 -translate-y-1/2 left-0.5"></div>
+                </div>
+                <span class="text-sm">Off</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-6 bg-black border-wire rounded-full relative cursor-pointer">
+                  <div class="w-5 h-5 bg-white border-wire rounded-full absolute top-1/2 -translate-y-1/2 right-0.5"></div>
+                </div>
+                <span class="text-sm">On</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between max-w-sm p-4 border-wire rounded-md">
+              <div>
+                <p class="font-medium">Email notifications</p>
+                <p class="text-sm font-light">Receive emails about activity</p>
+              </div>
+              <div class="w-11 h-6 bg-black border-wire rounded-full relative cursor-pointer">
+                <div class="w-5 h-5 bg-white border-wire rounded-full absolute top-1/2 -translate-y-1/2 right-0.5"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDER ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Slider</h2>
+          <p class="text-sm mb-6">An input where the user selects a value from within a given range.</p>
+
+          <div class="space-y-8 max-w-md">
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>Volume</span>
+                <span>75</span>
+              </div>
+              <div class="relative h-2 bg-gray-200 border-wire rounded-full">
+                <div class="absolute h-full bg-black rounded-full" style="width: 75%"></div>
+                <div class="absolute w-5 h-5 bg-white border-wire rounded-full top-1/2 -translate-y-1/2 cursor-pointer" style="left: calc(75% - 10px)"></div>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span>Price Range</span>
+                <span>$20 - $80</span>
+              </div>
+              <div class="relative h-2 bg-gray-200 border-wire rounded-full">
+                <div class="absolute h-full bg-black" style="left: 20%; width: 60%"></div>
+                <div class="absolute w-5 h-5 bg-white border-wire rounded-full top-1/2 -translate-y-1/2 cursor-pointer" style="left: calc(20% - 10px)"></div>
+                <div class="absolute w-5 h-5 bg-white border-wire rounded-full top-1/2 -translate-y-1/2 cursor-pointer" style="left: calc(80% - 10px)"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TOGGLE ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Toggle</h2>
+          <p class="text-sm mb-6">A two-state button that can be either on or off.</p>
+
+          <div class="space-y-6">
+            <div class="flex items-center gap-2">
+              <button class="px-4 py-2 border-wire rounded-md bg-black text-white">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                </svg>
+              </button>
+              <button class="px-4 py-2 border-wire rounded-md">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div>
+              <p class="text-sm font-light mb-3">Toggle Group</p>
+              <div class="flex border-wire rounded-md w-fit overflow-hidden">
+                <button class="px-4 py-2 bg-black text-white flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                  </svg>
+                  Grid
+                </button>
+                <button class="px-4 py-2 flex items-center gap-2 border-l-wire">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                  </svg>
+                  List
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TABS ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Tabs</h2>
+          <p class="text-sm mb-6">A set of layered sections of content displayed one at a time.</p>
+
+          <div class="space-y-8">
+            <div>
+              <p class="text-sm font-light mb-3">Horizontal</p>
+              <div class="flex gap-0">
+                <button class="px-6 py-3 font-medium bg-black text-white border-wire rounded-t-md">Account</button>
+                <button class="px-6 py-3 font-medium border-wire border-b-0 rounded-t-md -ml-[1.5px]">Password</button>
+                <button class="px-6 py-3 font-medium border-wire border-b-0 rounded-t-md -ml-[1.5px]">Settings</button>
+              </div>
+              <div class="border-wire rounded-b-md rounded-tr-md p-6 bg-white -mt-[1.5px]">
+                <p>Tab content goes here. This is the account settings panel.</p>
+              </div>
+            </div>
+
+            <div>
+              <p class="text-sm font-light mb-3">Vertical</p>
+              <div class="flex gap-0 max-w-xl">
+                <div class="flex flex-col w-40 border-wire rounded-l-md overflow-hidden">
+                  <button class="px-4 py-3 text-left font-medium bg-black text-white border-b-wire">Account</button>
+                  <button class="px-4 py-3 text-left font-medium border-b-wire">Password</button>
+                  <button class="px-4 py-3 text-left font-medium">Settings</button>
+                </div>
+                <div class="flex-1 border-wire border-l-0 rounded-r-md p-6 -ml-[1.5px]">
+                  <p>Tab content goes here. This is the account settings panel.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== ACCORDION ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Accordion</h2>
+          <p class="text-sm mb-6">A vertically stacked set of interactive headings that reveal content.</p>
+
+          <div class="border-wire rounded-md divide-y-wire overflow-hidden max-w-xl">
+            <div class="p-4">
+              <div class="flex items-center justify-between cursor-pointer">
+                <h3 class="font-medium">Is it accessible?</h3>
+                <span class="text-xl">−</span>
+              </div>
+              <p class="text-sm mt-3">Yes. It adheres to the WAI-ARIA design pattern.</p>
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between cursor-pointer">
+                <h3 class="font-medium">Is it styled?</h3>
+                <span class="text-xl">+</span>
+              </div>
+            </div>
+            <div class="p-4">
+              <div class="flex items-center justify-between cursor-pointer">
+                <h3 class="font-medium">Is it animated?</h3>
+                <span class="text-xl">+</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== DIALOG ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Dialog</h2>
+          <p class="text-sm mb-6">A modal dialog that interrupts the user with important content.</p>
+
+          <div class="bg-gray-200 p-8 flex items-center justify-center rounded-md">
+            <div class="bg-white border-wire rounded-md p-6 w-96">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold">Edit Profile</h3>
+                <button class="w-8 h-8 flex items-center justify-center border-wire rounded-md">×</button>
+              </div>
+              <p class="mb-4">Make changes to your profile here.</p>
+              <div class="space-y-4 mb-6">
+                <div>
+                  <label class="block text-sm font-medium mb-1">Name</label>
+                  <input type="text" class="w-full px-3 py-2 border-wire rounded-md" value="John Doe">
+                </div>
+                <div>
+                  <label class="block text-sm font-medium mb-1">Username</label>
+                  <input type="text" class="w-full px-3 py-2 border-wire rounded-md" value="@johndoe">
+                </div>
+              </div>
+              <div class="flex gap-3 justify-end">
+                <button class="px-4 py-2 border-wire rounded-md">Cancel</button>
+                <button class="px-4 py-2 bg-black text-white rounded-md">Save</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SHEET ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Sheet</h2>
+          <p class="text-sm mb-6">Extends the Dialog component to display content that complements the main content.</p>
+
+          <div class="relative h-64 bg-gray-200 rounded-md overflow-hidden">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute right-0 top-0 bottom-0 w-80 bg-white border-l-wire p-6">
+              <div class="flex items-center justify-between mb-6">
+                <h3 class="font-bold">Sheet Title</h3>
+                <button class="w-8 h-8 flex items-center justify-center border-wire rounded-md">×</button>
+              </div>
+              <p class="text-sm mb-4">Sheet content slides in from the side.</p>
+              <button class="w-full py-2 bg-black text-white rounded-md">Save changes</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== ALERT ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Alert</h2>
+          <p class="text-sm mb-6">Displays a callout for user attention.</p>
+
+          <div class="space-y-4 max-w-xl">
+            <div class="p-4 border-wire rounded-md flex gap-3">
+              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <div>
+                <p class="font-medium">Heads up!</p>
+                <p class="text-sm">You can add components to your app using the CLI.</p>
+              </div>
+            </div>
+
+            <div class="p-4 border-wire rounded-md bg-black text-white flex gap-3">
+              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+              <div>
+                <p class="font-medium">Error</p>
+                <p class="text-sm font-light">Your session has expired. Please log in again.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TOAST ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Toast</h2>
+          <p class="text-sm mb-6">A succinct message that is displayed temporarily.</p>
+
+          <div class="space-y-4 max-w-sm">
+            <div class="border-wire rounded-md p-4 flex items-start justify-between gap-4 shadow-wire">
+              <div>
+                <p class="font-medium">Scheduled</p>
+                <p class="text-sm font-light">Your message has been scheduled.</p>
+              </div>
+              <button class="text-lg leading-none">×</button>
+            </div>
+
+            <div class="border-wire rounded-md p-4 flex items-center justify-between gap-4 shadow-wire">
+              <p class="font-medium">Event deleted</p>
+              <div class="flex items-center gap-2">
+                <button class="text-sm underline">Undo</button>
+                <button class="text-lg leading-none">×</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== CARD ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Card</h2>
+          <p class="text-sm mb-6">Displays a card with header, content, and footer.</p>
+
+          <div class="grid grid-cols-2 gap-6 max-w-2xl">
+            <div class="border-wire rounded-md overflow-hidden">
+              <div class="aspect-[4/3] bg-gray-200 flex items-center justify-center border-b-wire">
+                <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div class="p-4">
+                <span class="text-xs px-2 py-1 bg-gray-200 border-wire rounded-md">Category</span>
+                <h3 class="font-semibold mt-2 mb-1">Card Title</h3>
+                <p class="text-sm mb-3">Brief description of this card content.</p>
+                <button class="text-sm px-3 py-1 border-wire rounded-md">Action</button>
+              </div>
+            </div>
+
+            <div class="border-wire rounded-md p-6">
+              <h3 class="font-semibold mb-1">Simple Card</h3>
+              <p class="text-sm mb-4">A card without an image, just content and optional actions.</p>
+              <div class="flex gap-2">
+                <button class="text-sm px-3 py-1 bg-black text-white rounded-md">Primary</button>
+                <button class="text-sm px-3 py-1 border-wire rounded-md">Secondary</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== AVATAR ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Avatar</h2>
+          <p class="text-sm mb-6">An image element with a fallback for representing the user.</p>
+
+          <div class="space-y-6">
+            <div>
+              <p class="text-sm font-light mb-3">Sizes</p>
+              <div class="flex items-end gap-4">
+                <div class="w-8 h-8 bg-gray-200 rounded-full border-wire flex items-center justify-center text-xs font-medium">S</div>
+                <div class="w-10 h-10 bg-gray-200 rounded-full border-wire flex items-center justify-center text-sm font-medium">M</div>
+                <div class="w-12 h-12 bg-gray-200 rounded-full border-wire flex items-center justify-center font-medium">L</div>
+                <div class="w-16 h-16 bg-gray-200 rounded-full border-wire flex items-center justify-center text-lg font-medium">XL</div>
+              </div>
+            </div>
+
+            <div>
+              <p class="text-sm font-light mb-3">Group</p>
+              <div class="flex -space-x-3">
+                <div class="w-10 h-10 bg-gray-200 rounded-full border-wire flex items-center justify-center text-sm font-medium ring-2 ring-white">A</div>
+                <div class="w-10 h-10 bg-gray-200 rounded-full border-wire flex items-center justify-center text-sm font-medium ring-2 ring-white">B</div>
+                <div class="w-10 h-10 bg-gray-200 rounded-full border-wire flex items-center justify-center text-sm font-medium ring-2 ring-white">C</div>
+                <div class="w-10 h-10 bg-black rounded-full border-wire flex items-center justify-center text-sm font-medium text-white ring-2 ring-white">+3</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== BADGE ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Badge</h2>
+          <p class="text-sm mb-6">Displays a badge or a component that looks like a badge.</p>
+
+          <div class="flex items-center gap-3 flex-wrap">
+            <span class="px-3 py-1 bg-black text-white text-sm rounded-md">Default</span>
+            <span class="px-3 py-1 border-wire text-sm rounded-md">Secondary</span>
+            <span class="px-3 py-1 bg-gray-200 text-sm rounded-md">Outline</span>
+          </div>
+        </section>
+
+        <!-- ==================== BREADCRUMB ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Breadcrumb</h2>
+          <p class="text-sm mb-6">Displays the path to the current resource using a hierarchy of links.</p>
+
+          <nav class="flex items-center gap-2 text-sm">
+            <a href="#" class="font-medium">Home</a>
+            <span>/</span>
+            <a href="#" class="font-medium">Components</a>
+            <span>/</span>
+            <span class="font-light">Breadcrumb</span>
+          </nav>
+        </section>
+
+        <!-- ==================== DROPDOWN MENU ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Dropdown Menu</h2>
+          <p class="text-sm mb-6">Displays a menu to the user triggered by a button.</p>
+
+          <div class="flex gap-8 pb-36">
+            <div class="relative">
+              <button class="px-4 py-2 border-wire rounded-md flex items-center gap-2">
+                Options
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div class="absolute top-full left-0 mt-2 w-48 border-wire rounded-md bg-white shadow-wire overflow-hidden">
+                <div class="py-1">
+                  <a href="#" class="block px-4 py-2 text-sm">Profile</a>
+                  <a href="#" class="block px-4 py-2 text-sm">Settings</a>
+                  <div class="border-t-wire my-1"></div>
+                  <a href="#" class="block px-4 py-2 text-sm">Log out</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== COMMAND ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Command</h2>
+          <p class="text-sm mb-6">Fast, composable, unstyled command menu.</p>
+
+          <div class="max-w-md border-wire rounded-md shadow-wire overflow-hidden">
+            <div class="flex items-center gap-3 px-4 py-3 border-b-wire">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <input type="text" class="flex-1 outline-none" placeholder="Type a command...">
+              <kbd class="px-2 py-1 bg-gray-100 border-wire rounded text-xs">⌘K</kbd>
+            </div>
+            <div class="py-2">
+              <p class="px-4 py-2 text-xs font-medium">Suggestions</p>
+              <div class="px-4 py-2 bg-gray-100 flex items-center gap-3 text-sm">Calendar</div>
+              <div class="px-4 py-2 flex items-center gap-3 text-sm">Search Emoji</div>
+              <div class="px-4 py-2 flex items-center gap-3 text-sm">Calculator</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== CALENDAR ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Calendar</h2>
+          <p class="text-sm mb-6">A date field component that allows users to select dates.</p>
+
+          <div class="border-wire rounded-md p-4 w-fit">
+            <div class="flex items-center justify-between mb-4">
+              <button class="w-8 h-8 border-wire rounded-md flex items-center justify-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+              </button>
+              <span class="font-semibold">January 2025</span>
+              <button class="w-8 h-8 border-wire rounded-md flex items-center justify-center">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center text-sm mb-2">
+              <span class="w-10 font-medium">Su</span>
+              <span class="w-10 font-medium">Mo</span>
+              <span class="w-10 font-medium">Tu</span>
+              <span class="w-10 font-medium">We</span>
+              <span class="w-10 font-medium">Th</span>
+              <span class="w-10 font-medium">Fr</span>
+              <span class="w-10 font-medium">Sa</span>
+            </div>
+            <div class="grid grid-cols-7 gap-1 text-center text-sm">
+              <span class="w-10 h-10 flex items-center justify-center font-light">29</span>
+              <span class="w-10 h-10 flex items-center justify-center font-light">30</span>
+              <span class="w-10 h-10 flex items-center justify-center font-light">31</span>
+              <span class="w-10 h-10 flex items-center justify-center">1</span>
+              <span class="w-10 h-10 flex items-center justify-center">2</span>
+              <span class="w-10 h-10 flex items-center justify-center">3</span>
+              <span class="w-10 h-10 flex items-center justify-center">4</span>
+              <span class="w-10 h-10 flex items-center justify-center">5</span>
+              <span class="w-10 h-10 flex items-center justify-center">6</span>
+              <span class="w-10 h-10 flex items-center justify-center">7</span>
+              <span class="w-10 h-10 flex items-center justify-center">8</span>
+              <span class="w-10 h-10 flex items-center justify-center">9</span>
+              <span class="w-10 h-10 flex items-center justify-center">10</span>
+              <span class="w-10 h-10 flex items-center justify-center">11</span>
+              <span class="w-10 h-10 flex items-center justify-center">12</span>
+              <span class="w-10 h-10 flex items-center justify-center">13</span>
+              <span class="w-10 h-10 flex items-center justify-center">14</span>
+              <span class="w-10 h-10 flex items-center justify-center bg-black text-white rounded-md">15</span>
+              <span class="w-10 h-10 flex items-center justify-center">16</span>
+              <span class="w-10 h-10 flex items-center justify-center">17</span>
+              <span class="w-10 h-10 flex items-center justify-center">18</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TABLE ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Table</h2>
+          <p class="text-sm mb-6">A responsive table component.</p>
+
+          <div class="border-wire rounded-md overflow-hidden">
+            <table class="w-full">
+              <thead>
+                <tr class="border-b-wire bg-gray-100">
+                  <th class="px-4 py-3 text-left text-sm font-semibold">Name</th>
+                  <th class="px-4 py-3 text-left text-sm font-semibold">Status</th>
+                  <th class="px-4 py-3 text-left text-sm font-semibold">Role</th>
+                  <th class="px-4 py-3 text-right text-sm font-semibold">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y-wire">
+                <tr>
+                  <td class="px-4 py-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 bg-gray-200 rounded-full border-wire flex items-center justify-center text-xs font-medium">JD</div>
+                      <div>
+                        <p class="font-medium">John Doe</p>
+                        <p class="text-sm font-light">john@example.com</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3"><span class="px-2 py-1 bg-black text-white text-xs rounded-md">Active</span></td>
+                  <td class="px-4 py-3 text-sm">Admin</td>
+                  <td class="px-4 py-3 text-right"><button class="text-sm underline">Edit</button></td>
+                </tr>
+                <tr>
+                  <td class="px-4 py-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 bg-gray-200 rounded-full border-wire flex items-center justify-center text-xs font-medium">AS</div>
+                      <div>
+                        <p class="font-medium">Alice Smith</p>
+                        <p class="text-sm font-light">alice@example.com</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-4 py-3"><span class="px-2 py-1 border-wire text-xs rounded-md">Pending</span></td>
+                  <td class="px-4 py-3 text-sm">Member</td>
+                  <td class="px-4 py-3 text-right"><button class="text-sm underline">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ==================== PAGINATION ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Pagination</h2>
+          <p class="text-sm mb-6">Pagination with page navigation, next and previous links.</p>
+
+          <div class="flex items-center justify-center gap-2">
+            <button class="w-10 h-10 border-wire rounded-md flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+              </svg>
+            </button>
+            <button class="w-10 h-10 border-wire rounded-md bg-black text-white flex items-center justify-center font-medium">1</button>
+            <button class="w-10 h-10 border-wire rounded-md flex items-center justify-center font-medium">2</button>
+            <button class="w-10 h-10 border-wire rounded-md flex items-center justify-center font-medium">3</button>
+            <span class="px-2">...</span>
+            <button class="w-10 h-10 border-wire rounded-md flex items-center justify-center font-medium">10</button>
+            <button class="w-10 h-10 border-wire rounded-md flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <!-- ==================== PROGRESS ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Progress</h2>
+          <p class="text-sm mb-6">Displays an indicator showing the completion progress of a task.</p>
+
+          <div class="space-y-4 max-w-md">
+            <div class="h-3 bg-gray-200 border-wire rounded-full overflow-hidden">
+              <div class="h-full bg-black rounded-full" style="width: 60%"></div>
+            </div>
+            <div class="h-2 bg-gray-200 border-wire rounded-full overflow-hidden">
+              <div class="h-full bg-black rounded-full" style="width: 33%"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SKELETON ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Skeleton</h2>
+          <p class="text-sm mb-6">Use to show a placeholder while content is loading.</p>
+
+          <div class="space-y-6 max-w-md">
+            <div class="space-y-2">
+              <div class="h-4 bg-gray-200 rounded-md w-3/4"></div>
+              <div class="h-4 bg-gray-200 rounded-md w-full"></div>
+              <div class="h-4 bg-gray-200 rounded-md w-5/6"></div>
+            </div>
+
+            <div class="border-wire rounded-md p-4 flex items-center gap-4">
+              <div class="w-12 h-12 bg-gray-200 rounded-full"></div>
+              <div class="flex-1 space-y-2">
+                <div class="h-4 bg-gray-200 rounded-md w-1/3"></div>
+                <div class="h-3 bg-gray-200 rounded-md w-1/2"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SEPARATOR ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Separator</h2>
+          <p class="text-sm mb-6">Visually or semantically separates content.</p>
+
+          <div class="space-y-6 max-w-md">
+            <div>
+              <p class="mb-4">Content above</p>
+              <div class="border-t-wire"></div>
+              <p class="mt-4">Content below</p>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <div class="flex-1 border-t-wire"></div>
+              <span class="text-sm">or continue with</span>
+              <div class="flex-1 border-t-wire"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== TOOLTIP ==================== -->
+        <section class="px-6 py-12 section-divider bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Tooltip</h2>
+          <p class="text-sm mb-6">A popup that displays information related to an element.</p>
+
+          <div class="flex items-center gap-12">
+            <div class="relative">
+              <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-black text-white text-sm rounded-md whitespace-nowrap">
+                Add to library
+                <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-black"></div>
+              </div>
+              <button class="px-4 py-2 border-wire rounded-md">Hover</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== INPUT OTP ==================== -->
+        <section class="px-6 py-12 section-divider">
+          <h2 class="text-xl font-bold mb-2">Input OTP</h2>
+          <p class="text-sm mb-6">Accessible one-time password component with copy paste functionality.</p>
+
+          <div class="flex gap-2">
+            <input type="text" maxlength="1" class="w-12 h-14 border-wire rounded-md text-center text-2xl font-medium" value="1">
+            <input type="text" maxlength="1" class="w-12 h-14 border-wire rounded-md text-center text-2xl font-medium" value="2">
+            <input type="text" maxlength="1" class="w-12 h-14 border-wire rounded-md text-center text-2xl font-medium" value="3">
+            <span class="flex items-center px-1">-</span>
+            <input type="text" maxlength="1" class="w-12 h-14 border-wire rounded-md text-center text-2xl font-medium" value="4">
+            <input type="text" maxlength="1" class="w-12 h-14 border-wire rounded-md text-center text-2xl font-medium" value="5">
+            <input type="text" maxlength="1" class="w-12 h-14 border-wire rounded-md text-center text-2xl font-medium">
+          </div>
+        </section>
+
+        <!-- ==================== NAVIGATION MENU ==================== -->
+        <section class="px-6 py-12 bg-gray-50">
+          <h2 class="text-xl font-bold mb-2">Navigation Menu</h2>
+          <p class="text-sm mb-6">A collection of links for navigating websites.</p>
+
+          <nav class="border-wire rounded-md px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 border-wire rounded-md flex items-center justify-center">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                  </svg>
+                </div>
+                <span class="font-semibold">Brand</span>
+              </div>
+              <div class="flex items-center gap-6 text-sm">
+                <a href="#" class="font-medium">Home</a>
+                <a href="#">Features</a>
+                <a href="#">Pricing</a>
+                <a href="#">About</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-3">
+              <button class="text-sm px-4 py-2 border-wire rounded-md">Log in</button>
+              <button class="text-sm px-4 py-2 bg-black text-white rounded-md">Sign up</button>
+            </div>
+          </nav>
+        </section>
+
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Background color toggle
+    const bgWhite = document.getElementById('bg-white');
+    const bgSepia = document.getElementById('bg-sepia');
+    const bgDark = document.getElementById('bg-dark');
+    const utilityBar = document.getElementById('utility-bar');
+    const themeButtons = [bgWhite, bgSepia, bgDark];
+
+    function clearThemeSelection() {
+      themeButtons.forEach(btn => btn.classList.remove('ring-2', 'ring-black', 'ring-white'));
+      document.body.classList.remove('dark-mode');
+      document.body.style.backgroundColor = '';
+    }
+
+    bgWhite.addEventListener('click', () => {
+      clearThemeSelection();
+      document.body.style.backgroundColor = '#ffffff';
+      utilityBar.style.backgroundColor = '#fafafa';
+      utilityBar.style.borderColor = '#e5e5e5';
+      bgWhite.classList.add('ring-2', 'ring-black');
+    });
+
+    bgSepia.addEventListener('click', () => {
+      clearThemeSelection();
+      document.body.style.backgroundColor = '#f5f1e8';
+      utilityBar.style.backgroundColor = '#eae6dd';
+      utilityBar.style.borderColor = '#ddd8cf';
+      bgSepia.classList.add('ring-2', 'ring-black');
+    });
+
+    bgDark.addEventListener('click', () => {
+      clearThemeSelection();
+      document.body.classList.add('dark-mode');
+      utilityBar.style.backgroundColor = '#2a2a2a';
+      utilityBar.style.borderColor = '#444';
+      bgDark.classList.add('ring-2', 'ring-white');
+    });
+  </script>
+
+</body>
+</html>
